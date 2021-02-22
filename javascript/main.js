@@ -2,8 +2,11 @@ const addBtn = document.querySelector(".add-btn");
 const taskInput = document.querySelector(".task-input");
 const taskList = document.querySelector(".task-list");
 
+document.addEventListener("DOMContentLoaded", getTasks);
 addBtn.addEventListener("click", addTask);
 taskList.addEventListener("click", deleteTask);
+
+
 
 // Add new task function
 function addTask(e) {
@@ -18,6 +21,9 @@ function addTask(e) {
     newTask.classList.add("task-item");
     // Add new task to div
     taskDiv.appendChild(newTask);
+
+    // Add task to local storage
+    saveTasks(taskInput.value);
 
     // Create check button
     const checkBtn = document.createElement("button");
@@ -48,7 +54,12 @@ function deleteTask (e) {
     const item = e.target;
     if (item.classList[0]=== 'delete-btn'){
         const task = item.parentElement; 
-        task.remove();
+        // Delete element after transition 
+        task.classList.add("fall");
+        deleteStoredTask(task);
+        task.addEventListener("transitionend", function()   {
+            task.remove();
+        });
     }
     
     // Check completed item and delete
@@ -57,3 +68,25 @@ function deleteTask (e) {
         task.classList.toggle("completed");
     }
 }
+
+// Save tasks function
+function saveTasks (task)    {
+    let tasks;
+
+    // Check if tasks exists
+    // If null then create array
+    if (localStorage.getItem("tasks" ) === null) {
+        tasks = [];
+    }
+    else
+    {
+        tasks = JSON.parse(localStorage.getItem("tasks"));
+    }
+
+    // If array exists append new task to array
+    tasks.push(task);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+
+
