@@ -88,5 +88,22 @@ function saveTasks (task)    {
     localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
+// Delete task from local storage
+function deleteStoredTask(task)   {
+    let tasks;
+    // Check if tasks exists
+    // If null then create array
+    if (localStorage.getItem("tasks" ) === null) {
+        tasks = [];
+    }
+    else
+    {
+        tasks = JSON.parse(localStorage.getItem("tasks"));
+    }
 
+    const taskIndex = task.children[0].innerText;
+    tasks.splice(tasks.indexOf(taskIndex), 1)
+
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+}
 
