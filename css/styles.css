@@ -75,6 +75,7 @@ button:hover    {
 
 .task-item  {
     padding: 0rem .5rem;
+    font-weight: 600;
 }
 
 .fa-check-square, .fa-eraser   {
