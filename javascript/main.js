@@ -6,7 +6,49 @@ document.addEventListener("DOMContentLoaded", getTasks);
 addBtn.addEventListener("click", addTask);
 taskList.addEventListener("click", deleteTask);
 
+// Retrieve stored tasks
+function getTasks() {
+    let tasks;
 
+    // Check if tasks exists
+    // If null then create array
+    if (localStorage.getItem("tasks" ) === null) {
+        tasks = [];
+    }
+    else
+    {
+        tasks = JSON.parse(localStorage.getItem("tasks"));
+    }
+    
+    tasks.forEach(tasks => {
+        // Create div
+        const taskDiv = document.createElement("div");
+        taskDiv.classList.add("task");
+        // Create list from stored tasks
+        const newTask = document.createElement("li");
+        newTask.innerText = tasks;
+        newTask.classList.add("task-item");
+        // Add new task to div
+        taskDiv.appendChild(newTask);
+
+        // Create check button
+        const checkBtn = document.createElement("button");
+        checkBtn.innerHTML = '<i class="far fa-check-square"></i>'
+        checkBtn.classList.add("check-btn");
+        // Add button to div
+        taskDiv.appendChild(checkBtn);
+
+        // Create delete button
+        const deleteBtn = document.createElement("button");
+        deleteBtn.innerHTML = '<i class="fas fa-eraser"></i>'
+        deleteBtn.classList.add("delete-btn");
+        // Add delete button to div
+        taskDiv.appendChild(deleteBtn);
+
+        // Add completed div to unordered list
+        taskList.appendChild(taskDiv);
+    });
+}
 
 // Add new task function
 function addTask(e) {
