@@ -3,8 +3,9 @@ const taskInput = document.querySelector(".task-input");
 const taskList = document.querySelector(".task-list");
 
 addBtn.addEventListener("click", addTask);
+taskList.addEventListener("click", deleteTask);
 
-
+// Add new task function
 function addTask(e) {
     e.preventDefault();
 
@@ -13,7 +14,7 @@ function addTask(e) {
     taskDiv.classList.add("task");
     // Create list
     const newTask = document.createElement("li");
-    // newTask.innerText = "hi";
+    newTask.innerText = taskInput.value;
     newTask.classList.add("task-item");
     // Add new task to div
     taskDiv.appendChild(newTask);
@@ -28,11 +29,31 @@ function addTask(e) {
     // Create delete button
     const deleteBtn = document.createElement("button");
     deleteBtn.innerHTML = '<i class="fas fa-eraser"></i>'
-    deleteBtn.classList.add("trash-btn");
+    deleteBtn.classList.add("delete-btn");
     // Add delete button to div
     taskDiv.appendChild(deleteBtn);
 
     // Add completed div to unordered list
     taskList.appendChild(taskDiv);
 
+    // Clear Task Input
+    taskInput.value = "";
+}
+
+// Delete or Complete Task function
+function deleteTask (e) {
+    e.preventDefault();
+
+    // Delete task item
+    const item = e.target;
+    if (item.classList[0]=== 'delete-btn'){
+        const task = item.parentElement; 
+        task.remove();
+    }
+    
+    // Check completed item and delete
+    if (item.classList[0]=== 'check-btn'){
+        const task = item.parentElement; 
+        task.classList.toggle("completed");
+    }
 }

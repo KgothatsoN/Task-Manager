@@ -42,4 +42,58 @@ button:hover    {
     transform: scale(1.1);
 }
 
+.task-list  {
+    list-style: none;
+    min-width: 30%;
+}
+
+.container  {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.task   {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: .5rem;
+    font-size: 1.5rem;
+    background-color: white;
+    color: black;
+}
+
+.task li    {
+    flex: 1;
+}
+
+.task-item  {
+    padding: 0rem .5rem;
+}
+
+.fa-tasks, .fa-eraser   {
+    pointer-events: none;
+}
+
+.delete-btn, .check-btn  {
+    background: rgb(243, 47, 47);
+    color: white;
+    padding: 1rem;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.delete-btn:hover  {
+    background: red;
+}
+
+.check-btn  {
+    background-color: #69ca0a;
+}
+
+.check-btn:hover    {
+    background: chartreuse;
+}
+
 
